@@ -1,6 +1,6 @@
-## This tool will take screenshots by puppeteer
-giving list of url, list of resolutions, sub-folder name
-note: default directory is screenshot/{resolutions}/, you can make it screenshot/{sub-folder-name}/{resolution}/
+## This tool will take screenshots by puppeteer  
+giving list of **url**, list of **resolutions**, sub-folder name(optional)  
+note: default directory is screenshot/{resolutions}/, you can make it screenshot/{sub-folder-name}/{resolution}/  
 ```
 // example:
 const urlList = [
