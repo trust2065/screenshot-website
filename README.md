@@ -1,5 +1,5 @@
-## This tool will take screenshots
-### base on puppeteer  
+## This tool will take screenshots and save it on your local disk
+### the script is base on puppeteer https://github.com/GoogleChrome/puppeteer
 
 giving list of **url**, list of **resolutions**, sub-folder name(optional)  
 note: default directory is screenshot/{resolutions}/, you can make it screenshot/{sub-folder-name}/{resolution}/  
