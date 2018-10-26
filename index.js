@@ -64,9 +64,9 @@ const fs = require('fs');
             { name: "au-free-freight", link: "http://www.teaching.com.au/page/mta-au-free-freight" },
             { name: "au-new-items", link: "http://www.teaching.com.au/page/mta-au-new-items" },
             { name: "teacher-home", link: "http://www.teaching.com.au/page/mta-teacher-home" },
-            { name: "entry catalogue", link: "https://www.teaching.com.au/catalogue/mta/mta-t3-new" },
+            { name: "entry catalogue", link: "https://www.teaching.com.au/catalogue/mta/mta-developmental-inclusion" },
             { name: "actual catalogue", link: "https://www.teaching.com.au/catalogue/mta/mta-baby-toddler-age0" },
-            { name: "actual catalogue gallery view", link: "https://www.teaching.com.au/catalogue/mta/mta-baby-toddler-age0" },
+            { name: "actual catalogue gallery view", link: "https://www.teaching.com.au/catalogue/mta/mta-baby-consumables-baby-wipes" },
             { name: "product", link: "https://www.teaching.com.au/product/NAS101" }
         ];
         const deviceList = [
@@ -75,23 +75,38 @@ const fs = require('fs');
             { name: "mobile", width: 360, height: 640 }
         ];
 
-        const browser = await puppeteer.launch({ headless: true });
+        const testList = [
+            { name: "entry catalogue", link: "https://www.teaching.com.au/catalogue/mta/mta-developmental-inclusion" },
+        ];
+
+        const urlDevList = testList.map(url => {
+            return { name: url.name, link: url.link.replace('www.teaching.com.au', 'www.dev.teaching.com.au') };
+        });
+
+        const rootPath = "dev";
+        const list = urlDevList;
+
+        console.log(list);
+
+        const browser = await puppeteer.launch({ headless: true, ignoreHTTPSErrors: true });
         const page = await browser.newPage();
 
-        for (let i = 0; i < urlList.length; i++) {
-            const url = urlList[i];
+        for (let i = 0; i < list.length; i++) {
+            const url = list[i];
 
             await page.goto(url.link);
-            await page.waitFor(2000);
+            await page.waitFor(3000);
+
+            // change view mode on catalogue page
             if (url.name === "actual catalogue gallery view") {
-                await page.click("span title=['Gallery view']");
-                await page.waitFor(2000);
+                await page.click("span[title='Gallery view']");
+                await page.waitFor(3000);
             }
 
             for (let j = 0; j < deviceList.length; j++) {
                 const device = deviceList[j];
                 console.log(`${url.name} ${device.name}`);
-                const path = `screenshot/${device.name}/`;
+                const path = `screenshot/${rootPath}/${device.name}/`;
                 const fileName = `${url.name}.png`;
 
                 if (!fs.existsSync(path)) {
@@ -99,6 +114,7 @@ const fs = require('fs');
                 }
 
                 await page.setViewport(device);
+                await page.waitFor(1000);
                 if (!fs.exists(path + fileName)) {
                     await page.screenshot({ fullPage: true, path: path + fileName });
                 }
