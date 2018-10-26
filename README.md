@@ -3,7 +3,8 @@ giving list of url, list of resolution, folder name
 note: you may need to build the root folder manually
 
 ex: 
-```const urlList = [
+```
+const urlList = [
             { name: "about", link: "http://www.teaching.com.au/page/mta-about" }
 ];
 const deviceList = [
