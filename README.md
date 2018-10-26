@@ -3,7 +3,7 @@
 https://github.com/GoogleChrome/puppeteer  
 
 Giving list of **url**, list of **resolutions**, sub-folder name(optional)  
-and it will save by the name in list that you given.
+and it will save by the name in list that you given.  
 note: default directory is screenshot/{resolutions}/, you can make it screenshot/{sub-folder-name}/{resolution}/  
 ```
 // example:
