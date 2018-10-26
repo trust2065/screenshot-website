@@ -1,5 +1,6 @@
 const puppeteer = require('puppeteer');
 const fs = require('fs');
+const mkdirp = require('mkdirp');
 
 (async () => {
     try {
@@ -109,17 +110,10 @@ const fs = require('fs');
                 const path = subPath ? `screenshot/${subPath}/${device.name}/` : `screenshot/${device.name}/`;
                 const fileName = `${url.name}.png`;
 
-                // build screenshot directory
-                if (!fs.existsSync(`screenshot`)) {
-                    fs.mkdirSync(`screenshot`);
-                }
-                // build subPath directory
-                if (subPath && !fs.existsSync(`screenshot/${subPath}`)) {
-                    fs.mkdirSync(`screenshot/${subPath}`);
-                }
-                // build resolution directory
-                if (!fs.existsSync(path)) {
-                    fs.mkdirSync(path);
+                try {
+                    mkdirp(path);
+                } catch (error) {
+                    console.log(error);
                 }
 
                 await page.setViewport(device);
