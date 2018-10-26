@@ -83,7 +83,7 @@ const fs = require('fs');
             return { name: url.name, link: url.link.replace('www.teaching.com.au', 'www.dev.teaching.com.au') };
         });
 
-        const rootPath = "dev";
+        const subPath = "dev";
         const list = urlDevList;
 
         console.log(list);
@@ -106,9 +106,18 @@ const fs = require('fs');
             for (let j = 0; j < deviceList.length; j++) {
                 const device = deviceList[j];
                 console.log(`${url.name} ${device.name}`);
-                const path = `screenshot/${rootPath}/${device.name}/`;
+                const path = subPath ? `screenshot/${subPath}/${device.name}/` : `screenshot/${device.name}/`;
                 const fileName = `${url.name}.png`;
 
+                // build screenshot directory
+                if (!fs.existsSync(`screenshot`)) {
+                    fs.mkdirSync(`screenshot`);
+                }
+                // build subPath directory
+                if (subPath && !fs.existsSync(`screenshot/${subPath}`)) {
+                    fs.mkdirSync(`screenshot/${subPath}`);
+                }
+                // build resolution directory
                 if (!fs.existsSync(path)) {
                     fs.mkdirSync(path);
                 }

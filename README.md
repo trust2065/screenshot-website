@@ -1,9 +1,8 @@
 ## This tool will take screenshots by puppeteer
-giving list of url, list of resolution, folder name
-note: you may need to build the root folder manually
-
-ex: 
+giving list of url, list of resolutions, sub-folder name
+note: default directory is screenshot/{resolutions}/, you can make it screenshot/{sub-folder-name}/{resolution}/
 ```
+// example:
 const urlList = [
             { name: "about", link: "http://www.teaching.com.au/page/mta-about" }
 ];
