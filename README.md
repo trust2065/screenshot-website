@@ -12,6 +12,8 @@ const deviceList = [
             { name: "mobile", width: 360, height: 640 }
 ];
 
+//const subPath = "dev";
+
 ```
 
 
