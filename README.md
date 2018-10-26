@@ -7,7 +7,7 @@ and it will save by the name in list that you given.
 
 note: default directory is screenshot/{resolutions}/, you can make it screenshot/{sub-folder-name}/{resolution}/  
 ```
-// example:
+//example
 const urlList = [
             { name: "about", link: "http://www.teaching.com.au/page/mta-about" }
 ];
@@ -17,6 +17,7 @@ const deviceList = [
             { name: "mobile", width: 360, height: 640 }
 ];
 
+//optional
 //const subPath = "dev";
 
 ```
